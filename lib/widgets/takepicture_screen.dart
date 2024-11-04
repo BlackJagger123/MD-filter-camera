@@ -1,22 +1,19 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_plugin_pubdev/widgets/displaypicture_screen.dart';
 
 class TakepictureScreen extends StatefulWidget {
-  const TakepictureScreen({
-    Key? key,
-    required this.camera,
-  }) : super(key: key);
+  const TakepictureScreen({Key? key, required this.camera}) : super(key: key);
 
   final CameraDescription camera;
 
   @override
-  TakepictureScreenState createState() => TakepictureScreenState();
+  TakepictureWidgetScreenState createState() => TakepictureWidgetScreenState();
 }
 
-class TakepictureScreenState extends State<TakepictureScreen> {
+class TakepictureWidgetScreenState extends State<TakepictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  bool _isTakingPicture = false; // Variabel untuk melacak status pengambilan gambar
 
   @override
   void initState() {
@@ -37,8 +34,8 @@ class TakepictureScreenState extends State<TakepictureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Take a picture - NIM Anda')),
-      body: FutureBuilder(
+      appBar: AppBar(title: const Text('Take a picture')),
+      body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -49,21 +46,23 @@ class TakepictureScreenState extends State<TakepictureScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
+        onPressed: _isTakingPicture ? null : () async {
           try {
+            setState(() {
+              _isTakingPicture = true; // Menandai bahwa pengambilan gambar sedang berlangsung
+            });
+
             await _initializeControllerFuture;
             final image = await _controller.takePicture();
-            if (!mounted) return;
 
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => DisplaypictureScreen(imagePath: image.path,
-                ),
-              ),
-            );
-            // Navigator.pop(context, image.path);
+            // Lakukan sesuatu dengan gambar yang diambil di sini (navigasi, tampilkan, dll.)
+
           } catch (e) {
             print(e);
+          } finally {
+            setState(() {
+              _isTakingPicture = false; // Reset status setelah pengambilan gambar selesai
+            });
           }
         },
         child: const Icon(Icons.camera_alt),
