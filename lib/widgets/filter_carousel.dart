@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flutter_plugin_pubdev/widgets/filter_selector.dart';
-import '';
-=======
-import 'package:manajemanplugin/widget/filter_selector.dart';
->>>>>>> e3703f6b3d56fefe26c471a1116b85283dbc2dd4
 
 
 class PhotoFilterCarousel extends StatefulWidget {
