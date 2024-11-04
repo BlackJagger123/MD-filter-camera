@@ -1,3 +1,10 @@
+### Hasil
+![1](https://github.com/user-attachments/assets/95238dc3-9061-44fe-b16e-4c987a089e0b)
+![Screenshot (94)](https://github.com/user-attachments/assets/2377fb4a-a281-406b-bb27-abc4a9ca369e)
+
+
+
+
 1. Jelaskan maksud void async pada praktikum 1?
    
 void async adalah fungsi yang tidak mengembalikan nilai apa pun (karena void) tapi bisa menjalankan tugas-tugas secara asinkron (async). Saat pakai async dapat digunakan untuk menjalankan kode yang mungkin memakan waktu lama, seperti mengambil data dari internet, tanpa membuat aplikasi berhenti sementara. Jadi, fungsi ini bisa melakukan tugas berat tanpa mengganggu bagian lain dari kode.
